@@ -45,7 +45,7 @@ func main() {
 		fmt.Println("=====================================================================================")
 		fmt.Println("				Manajer Turnamen")
 		fmt.Println("=====================================================================================")
-		fmt.Println("   Menu")
+		fmt.Println("   Menu:")
 		fmt.Println("   1. Registrasi Turnamen")
 		fmt.Println("   2. Login Turnamen")
 		fmt.Println("   3. List Turnamen")
