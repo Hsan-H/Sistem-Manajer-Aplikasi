@@ -79,6 +79,11 @@ func main() {
 }
 
 func registrasiTurnamen(Turnamen *tabTurnamen, n *int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Algoritma
 	fmt.Print("\033[H\033[2J")
 	fmt.Println("=====================================================================================")
@@ -102,6 +107,11 @@ func registrasiTurnamen(Turnamen *tabTurnamen, n *int) {
 }
 
 func Login(Turnamen *tabTurnamen, n int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var idx, pilihan int
 	var nama, password string
@@ -157,6 +167,11 @@ func Login(Turnamen *tabTurnamen, n int) {
 }
 
 func insertionSortTurnamen(Turnamen *tabTurnamen, n int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var i, j int
 	var x turnamen
@@ -175,7 +190,14 @@ func insertionSortTurnamen(Turnamen *tabTurnamen, n int) {
 }
 
 func binarySearch(Turnamen *tabTurnamen, ketemu *bool, index *int, n int, nama string) {
+	/*
+		I.S
+		F.S
+	*/
+
+	// Kamus Lokal
 	var left, mid, right int
+
 	// Algoritma
 	left = 0
 	right = n - 1
@@ -197,6 +219,11 @@ func binarySearch(Turnamen *tabTurnamen, ketemu *bool, index *int, n int, nama s
 }
 
 func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var pilihan, n, skorMenang, skorKalah int
 	var keluar bool
@@ -272,6 +299,11 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 }
 
 func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah int, n *int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var keluar bool
 	var apapun string
@@ -325,6 +357,11 @@ func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah
 }
 
 func Pemenang(Player tabPlayer, n int) string {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var i, j, k, max int
 	var menang kemenangan
@@ -349,6 +386,11 @@ func Pemenang(Player tabPlayer, n int) string {
 }
 
 func rekursif(datapemenang kemenangan, k int) string {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Algoritma
 	if k == 0 {
 		return ""
@@ -360,6 +402,11 @@ func rekursif(datapemenang kemenangan, k int) string {
 }
 
 func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, n, skorMenang, skorKalah int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var keluar bool
 	var pilihan, idxedit int
@@ -406,6 +453,11 @@ func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, n, skorMenang, skorKa
 }
 
 func sequentialSearch(Turnamen tabTurnamen, nama string, idx, n int) int {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var i, idxedit int
 	var ketemu bool
@@ -425,6 +477,11 @@ func sequentialSearch(Turnamen tabTurnamen, nama string, idx, n int) int {
 }
 
 func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorMenang, skorKalah int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus lokal
 	var keluar bool
 	var pilihan int
@@ -498,6 +555,11 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 }
 
 func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx, n int, skorMenang, skorKalah *int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var pilihan, i int
 	var keluar bool
@@ -553,6 +615,11 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx, n int, skorMenang, skorK
 }
 
 func interfaceRankingTurnamen(Turnamen tabTurnamen, idx, n int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var apapun string
 	var i int
@@ -582,6 +649,11 @@ func interfaceRankingTurnamen(Turnamen tabTurnamen, idx, n int) {
 }
 
 func selectionSort(Player *tabPlayer, n int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var i, j, nilaimax int
 	// Algoritma
@@ -599,6 +671,11 @@ func selectionSort(Player *tabPlayer, n int) {
 }
 
 func listTurnamen(Turnamen tabTurnamen, n int) {
+	/*
+		I.S
+		F.S
+	*/
+
 	// Kamus Lokal
 	var apapun string
 	var i int
