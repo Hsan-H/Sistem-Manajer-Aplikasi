@@ -301,8 +301,8 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 
 func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah int) {
 	/*
-		I.S
-		F.S
+		I.S terdefinisi array Turnamen yang berindex idxT dan variavel skorMenang dan skorKalah bersifat integer
+		F.S pengisian data array player yang berda di array Turnamen
 	*/
 
 	// Kamus Lokal
