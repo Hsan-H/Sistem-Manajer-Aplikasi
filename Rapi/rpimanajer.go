@@ -22,6 +22,7 @@ type turnamen struct {
 	password string
 	player   tabPlayer
 	Pemenang string
+	nPlayer  int
 }
 type tabTurnamen [NMAX]turnamen
 
@@ -80,8 +81,8 @@ func main() {
 
 func registrasiTurnamen(Turnamen *tabTurnamen, n *int) {
 	/*
-		I.S
-		F.S
+		I.S terdefinisi array Turnamen yang berisi n bilangan bulat
+		F.S pengisian data array Turnamen
 	*/
 
 	// Algoritma
@@ -108,8 +109,8 @@ func registrasiTurnamen(Turnamen *tabTurnamen, n *int) {
 
 func Login(Turnamen *tabTurnamen, n int) {
 	/*
-		I.S
-		F.S
+		I.S terdefinisi array Turnamen yang berisi n bilangan bulat
+		F.S pengecekan data yang di input sebagai verifikasi sebelum memasuki procedure interfaceTurnamen dengan menggunakan binary seaarch yang diurut dengan insertion sort
 	*/
 
 	// Kamus Lokal
@@ -220,12 +221,12 @@ func binarySearch(Turnamen *tabTurnamen, ketemu *bool, index *int, n int, nama s
 
 func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 	/*
-		I.S
-		F.S
+		I.S terdefinisi array Turnamen yang berindex idxT
+		F.S mengeluarkan output interface untuk registrasi, edit, ranking, dan juara player serta edit skor
 	*/
 
 	// Kamus Lokal
-	var pilihan, n, skorMenang, skorKalah int
+	var pilihan, skorMenang, skorKalah int
 	var keluar bool
 	var apapun string
 
@@ -256,22 +257,22 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 
 		// Switch
 		if pilihan == 1 {
-			interfaceRegistrasiPlayer(Turnamen, idxT, skorMenang, skorKalah, &n)
+			interfaceRegistrasiPlayer(Turnamen, idxT, skorMenang, skorKalah)
 
 			// Reset pilihan menjadi nol
 			pilihan = 0
 		} else if pilihan == 2 {
-			interfacePengeditanPlayer(Turnamen, idxT, n, skorMenang, skorKalah)
+			interfacePengeditanPlayer(Turnamen, idxT, skorMenang, skorKalah)
 
 			// Reset pilihan menjadi nol
 			pilihan = 0
 		} else if pilihan == 3 {
-			interfaceSkoringPlayer(Turnamen, idxT, n, &skorMenang, &skorKalah)
+			interfaceSkoringPlayer(Turnamen, idxT, &skorMenang, &skorKalah)
 
 			// Reset pilihan menjadi nol
 			pilihan = 0
 		} else if pilihan == 4 {
-			interfaceRankingTurnamen(*Turnamen, idxT, n)
+			interfaceRankingTurnamen(*Turnamen, idxT)
 
 			// Reset pilihan menjadi nol
 			pilihan = 0
@@ -298,7 +299,7 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 	}
 }
 
-func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah int, n *int) {
+func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah int) {
 	/*
 		I.S
 		F.S
@@ -322,25 +323,25 @@ func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah
 
 		// Pengisian Data Nama
 		fmt.Print("   Nama: ")
-		fmt.Scanln(&Turnamen[idx].player[*n].nama)
+		fmt.Scanln(&Turnamen[idx].player[Turnamen[idx].nPlayer].nama)
 
 		// Pengisian Data ID
 		fmt.Print("   ID: ")
-		fmt.Scanln(&Turnamen[idx].player[*n].id)
+		fmt.Scanln(&Turnamen[idx].player[Turnamen[idx].nPlayer].id)
 
 		// Pengisian Data Kemenangan
 		fmt.Print("   Jumlah Kemenangan: ")
-		fmt.Scanln(&Turnamen[idx].player[*n].menang)
+		fmt.Scanln(&Turnamen[idx].player[Turnamen[idx].nPlayer].menang)
 
 		// Pengisian Data Kekalahan
 		fmt.Print("   Jumlah Kekalahan: ")
-		fmt.Scanln(&Turnamen[idx].player[*n].kalah)
+		fmt.Scanln(&Turnamen[idx].player[Turnamen[idx].nPlayer].kalah)
 
 		// Menghitung skor Player (nilai skor sebelum diedit adalah 0)
-		Turnamen[idx].player[*n].skor = Turnamen[idx].player[*n].menang*skorMenang + Turnamen[idx].player[*n].kalah*skorKalah
+		Turnamen[idx].player[Turnamen[idx].nPlayer].skor = Turnamen[idx].player[Turnamen[idx].nPlayer].menang*skorMenang + Turnamen[idx].player[Turnamen[idx].nPlayer].kalah*skorKalah
 
 		// Menambah jumlah Turnamen
-		*n++
+		Turnamen[idx].nPlayer++
 
 		// Menawarkan untuk Mengakhiri Mengisi Data Player atau Menambah Player
 		fmt.Print("   Ketik 1 untuk menyudahi pengisan atau ketik apapun untuk menambah pemain: ")
@@ -353,7 +354,7 @@ func interfaceRegistrasiPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah
 	}
 
 	// Menghitung Kejuaraan
-	Turnamen[idx].Pemenang = Pemenang(Turnamen[idx].player, *n)
+	Turnamen[idx].Pemenang = Pemenang(Turnamen[idx].player, Turnamen[idx].nPlayer)
 }
 
 func Pemenang(Player tabPlayer, n int) string {
@@ -401,7 +402,7 @@ func rekursif(datapemenang kemenangan, k int) string {
 	}
 }
 
-func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, n, skorMenang, skorKalah int) {
+func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah int) {
 	/*
 		I.S
 		F.S
@@ -433,13 +434,13 @@ func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, n, skorMenang, skorKa
 			fmt.Scanln(&nama)
 
 			// Sequential Search untuk mencari index dari nama pemain
-			idxedit = sequentialSearch(*Turnamen, nama, idx, n)
+			idxedit = sequentialSearch(*Turnamen, nama, idx, Turnamen[idx].nPlayer)
 
 			// Logika untuk back-up bila nama yang di input tidak ada
 			if idxedit == -1 {
 				fmt.Println("   Silahkan lakukan ragistrasi player / lakukan input nama lagi.")
 			} else {
-				interfacePengeditanDataPlayer(Turnamen, idx, idxedit, n, skorKalah, skorKalah)
+				interfacePengeditanDataPlayer(Turnamen, idx, idxedit, Turnamen[idx].nPlayer, skorKalah, skorKalah)
 			}
 
 			// Reset pilihan menjadi nol
@@ -554,7 +555,7 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 	}
 }
 
-func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx, n int, skorMenang, skorKalah *int) {
+func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKalah *int) {
 	/*
 		I.S
 		F.S
@@ -588,7 +589,7 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx, n int, skorMenang, skorK
 			fmt.Scanln(skorMenang)
 
 			// Perulangan data untuk Menghitung Seluruh Skor Player
-			for i = 0; i < n; i++ {
+			for i = 0; i < Turnamen[idx].nPlayer; i++ {
 				Turnamen[idx].player[i].skor = Turnamen[idx].player[i].menang**skorMenang + Turnamen[idx].player[i].kalah**skorKalah
 			}
 
@@ -600,7 +601,7 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx, n int, skorMenang, skorK
 			fmt.Scanln(skorKalah)
 
 			// Perulangan data untuk Menghitung Seluruh Skor Player
-			for i = 0; i < n; i++ {
+			for i = 0; i < Turnamen[idx].nPlayer; i++ {
 				Turnamen[idx].player[i].skor = Turnamen[idx].player[i].menang**skorMenang + Turnamen[idx].player[i].kalah**skorKalah
 			}
 
@@ -614,7 +615,7 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx, n int, skorMenang, skorK
 	}
 }
 
-func interfaceRankingTurnamen(Turnamen tabTurnamen, idx, n int) {
+func interfaceRankingTurnamen(Turnamen tabTurnamen, idx int) {
 	/*
 		I.S
 		F.S
@@ -633,10 +634,10 @@ func interfaceRankingTurnamen(Turnamen tabTurnamen, idx, n int) {
 	fmt.Println("   Ranking Pemain Berdasarkan Skor")
 
 	// Selection Sort
-	selectionSort(&Turnamen[idx].player, n)
+	selectionSort(&Turnamen[idx].player, Turnamen[idx].nPlayer)
 
 	// Perulangan Output untuk Menampilkan Ranking
-	for i = 1; i <= n; i++ {
+	for i = 1; i <= Turnamen[idx].nPlayer; i++ {
 		fmt.Printf("   %d. Nama: %s \n", i, Turnamen[idx].player[i-1].nama)
 		fmt.Println("      ID: ", Turnamen[idx].player[i-1].id)
 		fmt.Println("      Skor: ", Turnamen[idx].player[i-1].skor)
@@ -672,8 +673,8 @@ func selectionSort(Player *tabPlayer, n int) {
 
 func listTurnamen(Turnamen tabTurnamen, n int) {
 	/*
-		I.S
-		F.S
+		I.S terdefinisi array Turnamen yang berisi n bilangan bulat
+		F.S menampilkan data array Turnamen berupa nama turnamen dan pemenangnya
 	*/
 
 	// Kamus Lokal
