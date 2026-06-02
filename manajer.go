@@ -18,11 +18,13 @@ type tabPlayer [NMAX]player
 
 // type untuk Turnamen
 type turnamen struct {
-	nama     string
-	password string
-	player   tabPlayer
-	Pemenang string
-	nPlayer  int
+	nama       string
+	password   string
+	player     tabPlayer
+	Pemenang   string
+	nPlayer    int
+	skorMenang int
+	skorKalah  int
 }
 type tabTurnamen [NMAX]turnamen
 
@@ -227,7 +229,6 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 	*/
 
 	// Kamus Lokal
-	var skorMenang, skorKalah int
 	var keluar bool
 	var apapun, pilihan string
 
@@ -242,8 +243,8 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 		fmt.Println("=====================================================================================")
 		fmt.Println("   Juara dan Ranking ditentukan oleh skor.")
 		fmt.Println("   JBerikut merupakan skor tiap menang dan kalah saat ini")
-		fmt.Println("   Menang =", skorMenang)
-		fmt.Println("   Kalah =", skorKalah)
+		fmt.Println("   Menang =", Turnamen[idxT].skorMenang)
+		fmt.Println("   Kalah =", Turnamen[idxT].skorKalah)
 		fmt.Println("-------------------------------------------------------------------------------------")
 		fmt.Println("   Menu")
 		fmt.Println("   1. Tambah Data Pemain")
@@ -258,17 +259,17 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 
 		// Switch
 		if pilihan == "1" {
-			interfaceRegistrasiPlayer(Turnamen, idxT, skorMenang, skorKalah)
+			interfaceRegistrasiPlayer(Turnamen, idxT, Turnamen[idxT].skorMenang, Turnamen[idxT].skorKalah)
 
 			// Reset pilihan menjadi nol
 			pilihan = "0"
 		} else if pilihan == "2" {
-			interfacePengeditanPlayer(Turnamen, idxT, skorMenang, skorKalah)
+			interfacePengeditanPlayer(Turnamen, idxT, Turnamen[idxT].skorMenang, Turnamen[idxT].skorKalah)
 
 			// Reset pilihan menjadi nol
 			pilihan = "0"
 		} else if pilihan == "3" {
-			interfaceSkoringPlayer(Turnamen, idxT, &skorMenang, &skorKalah)
+			interfaceSkoringPlayer(Turnamen, idxT, &Turnamen[idxT].skorMenang, &Turnamen[idxT].skorKalah)
 
 			// Reset pilihan menjadi nol
 			pilihan = "0"
