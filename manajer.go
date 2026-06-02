@@ -370,21 +370,24 @@ func Pemenang(Player tabPlayer, n int) string {
 
 	// Algoritma
 	// Mencari Nilai Ekstrim Maksimum untuk Mencari Nilai yang Juara
-	max = Player[0].skor
-	j = 1
-	for j < n {
-		if max < Player[j].skor {
-			max = Player[j].skor
+	if n != 0 {
+		max = Player[0].skor
+		j = 1
+		for j < n {
+			if max < Player[j].skor {
+				max = Player[j].skor
+			}
+			j++
 		}
-		j++
-	}
-	for i = 0; i < n; i++ {
-		if max == Player[i].skor {
-			menang[k] = Player[i].nama
-			k++
+		for i = 0; i < n; i++ {
+			if max == Player[i].skor {
+				menang[k] = Player[i].nama
+				k++
+			}
 		}
+		return rekursif(menang, k)
 	}
-	return rekursif(menang, k)
+	return "-"
 }
 
 func rekursif(datapemenang kemenangan, k int) string {
