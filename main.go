@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // Kamus Global
-const NMAX = 100
+const NMAX = 50
 
 // type untuk player
 type player struct {
