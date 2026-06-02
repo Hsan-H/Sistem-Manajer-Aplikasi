@@ -596,7 +596,7 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKala
 
 			// Perulangan data untuk Menghitung Seluruh Skor Player
 			for i = 0; i < Turnamen[idx].nPlayer; i++ {
-				Turnamen[idx].player[i].skor = Turnamen[idx].player[i].menang**skorMenang + Turnamen[idx].player[i].kalah**skorKalah
+				Turnamen[idx].player[i].skor = Turnamen[idx].player[i].menang*(*skorMenang) + Turnamen[idx].player[i].kalah*(*skorKalah)
 			}
 
 			// Reset pilihan menjadi nol
@@ -608,7 +608,7 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKala
 
 			// Perulangan data untuk Menghitung Seluruh Skor Player
 			for i = 0; i < Turnamen[idx].nPlayer; i++ {
-				Turnamen[idx].player[i].skor = Turnamen[idx].player[i].menang**skorMenang + Turnamen[idx].player[i].kalah**skorKalah
+				Turnamen[idx].player[i].skor = Turnamen[idx].player[i].menang*(*skorMenang) + Turnamen[idx].player[i].kalah*(*skorKalah)
 			}
 
 			// Reset pilihan menjadi nol
