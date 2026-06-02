@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // Kamus Global
-const NMAX = 1000
+const NMAX = 100
 
 // type untuk player
 type player struct {
@@ -32,8 +32,9 @@ type kemenangan [NMAX]string
 func main() {
 	// Kamus Lokal
 	var keluar bool
-	var pilihan, n int
+	var pilihan string
 	var Turnamen tabTurnamen
+	var n int
 
 	// Algoritma
 	keluar = false
@@ -55,22 +56,22 @@ func main() {
 		fmt.Scanln(&pilihan)
 
 		// Switch
-		if pilihan == 1 {
+		if pilihan == "1" {
 			registrasiTurnamen(&Turnamen, &n)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 2 {
+			pilihan = "0"
+		} else if pilihan == "2" {
 			Login(&Turnamen, n)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 3 {
+			pilihan = "0"
+		} else if pilihan == "3" {
 			listTurnamen(Turnamen, n)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 4 {
+			pilihan = "0"
+		} else if pilihan == "4" {
 			keluar = true
 		} else {
 			fmt.Println("Tidak ada pilihan yang anda input.")
@@ -114,8 +115,8 @@ func Login(Turnamen *tabTurnamen, n int) {
 	*/
 
 	// Kamus Lokal
-	var idx, pilihan int
-	var nama, password string
+	var idx int
+	var nama, password, pilihan string
 	var ketemuNama, ketemuPass, nyerah bool
 
 	// Algoritma
@@ -152,7 +153,7 @@ func Login(Turnamen *tabTurnamen, n int) {
 				fmt.Scanln(&pilihan)
 
 				// Logika agar perulangan berakhir bila manajer memilih menyerah
-				if pilihan == 1 {
+				if pilihan == "1" {
 					nyerah = true
 				}
 			}
@@ -226,9 +227,9 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 	*/
 
 	// Kamus Lokal
-	var pilihan, skorMenang, skorKalah int
+	var skorMenang, skorKalah int
 	var keluar bool
-	var apapun string
+	var apapun, pilihan string
 
 	// Algoritma
 	keluar = false
@@ -256,27 +257,27 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 		fmt.Scanln(&pilihan)
 
 		// Switch
-		if pilihan == 1 {
+		if pilihan == "1" {
 			interfaceRegistrasiPlayer(Turnamen, idxT, skorMenang, skorKalah)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 2 {
+			pilihan = "0"
+		} else if pilihan == "2" {
 			interfacePengeditanPlayer(Turnamen, idxT, skorMenang, skorKalah)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 3 {
+			pilihan = "0"
+		} else if pilihan == "3" {
 			interfaceSkoringPlayer(Turnamen, idxT, &skorMenang, &skorKalah)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 4 {
+			pilihan = "0"
+		} else if pilihan == "4" {
 			interfaceRankingTurnamen(*Turnamen, idxT)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 5 {
+			pilihan = "0"
+		} else if pilihan == "5" {
 			// Text Interface Ranking
 			fmt.Print("\033[H\033[2J")
 			fmt.Println("=====================================================================================")
@@ -290,8 +291,8 @@ func interfaceTurnamen(Turnamen *tabTurnamen, idxT int) {
 			fmt.Scanln(&apapun)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 6 {
+			pilihan = "0"
+		} else if pilihan == "6" {
 			keluar = true
 		} else {
 			fmt.Println("   Tidak ada pilihan yang anda input.")
@@ -410,8 +411,8 @@ func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah
 
 	// Kamus Lokal
 	var keluar bool
-	var pilihan, idxedit int
-	var nama string
+	var idxedit int
+	var nama, pilihan string
 
 	// Algoritma
 	keluar = false
@@ -428,7 +429,7 @@ func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah
 		fmt.Println("-------------------------------------------------------------------------------------")
 		fmt.Print("   Pilihan: ")
 		fmt.Scanln(&pilihan)
-		if pilihan == 1 {
+		if pilihan == "1" {
 			// Pengisian Data Nama yang Hendak diedit
 			fmt.Print("   Masukkan Nama Pemain: ")
 			fmt.Scanln(&nama)
@@ -444,8 +445,8 @@ func interfacePengeditanPlayer(Turnamen *tabTurnamen, idx, skorMenang, skorKalah
 			}
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 2 {
+			pilihan = "0"
+		} else if pilihan == "2" {
 			keluar = true
 		} else {
 			fmt.Println("   Tidak ada pilihan yang anda input.")
@@ -485,7 +486,7 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 
 	// Kamus lokal
 	var keluar bool
-	var pilihan int
+	var pilihan string
 
 	// Algoritma
 	keluar = false
@@ -505,7 +506,7 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 		fmt.Println("-------------------------------------------------------------------------------------")
 		fmt.Print("   Pilihan: ")
 		fmt.Scanln(&pilihan)
-		if pilihan == 1 {
+		if pilihan == "1" {
 			fmt.Println("   Perhatikan, Ganti Spasi dengan _ !")
 
 			// Pengeditan nama player
@@ -513,15 +514,15 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 			fmt.Scanln(&Turnamen[idx].player[idxedit].nama)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 2 {
+			pilihan = "0"
+		} else if pilihan == "2" {
 			// Pengeditan id player
 			fmt.Print("   Masukkan ID: ")
 			fmt.Scanln(&Turnamen[idx].player[idxedit].id)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 3 {
+			pilihan = "0"
+		} else if pilihan == "3" {
 			// Pengeditan Jumlah Kemenangan player
 			fmt.Print("   Masukkan Jumlah Kemenangan: ")
 			fmt.Scanln(&Turnamen[idx].player[idxedit].menang)
@@ -533,8 +534,8 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 			Turnamen[idx].Pemenang = Pemenang(Turnamen[idx].player, n)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 4 {
+			pilihan = "0"
+		} else if pilihan == "4" {
 			// Menghitung Jumlah Kekalahan
 			fmt.Print("   Masukkan Jumlah Kekalahan: ")
 			fmt.Scanln(&Turnamen[idx].player[idxedit].kalah)
@@ -546,8 +547,8 @@ func interfacePengeditanDataPlayer(Turnamen *tabTurnamen, idx, idxedit, n, skorM
 			Turnamen[idx].Pemenang = Pemenang(Turnamen[idx].player, n)
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 5 {
+			pilihan = "0"
+		} else if pilihan == "5" {
 			keluar = true
 		} else {
 			fmt.Println("   Tidak ada pilihan yang anda input.")
@@ -562,8 +563,9 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKala
 	*/
 
 	// Kamus Lokal
-	var pilihan, i int
+	var pilihan string
 	var keluar bool
+	var i int
 
 	// Algoritma
 	keluar = false
@@ -583,7 +585,7 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKala
 		fmt.Scanln(&pilihan)
 
 		// Switch
-		if pilihan == 1 {
+		if pilihan == "1" {
 			// Pengeditan Skor Menang
 			fmt.Print("   Skor Menang: ")
 			fmt.Scanln(skorMenang)
@@ -594,8 +596,8 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKala
 			}
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 2 {
+			pilihan = "0"
+		} else if pilihan == "2" {
 			// Pengeditan Skor Kalah
 			fmt.Print("   Skor Kalah: ")
 			fmt.Scanln(skorKalah)
@@ -606,8 +608,8 @@ func interfaceSkoringPlayer(Turnamen *tabTurnamen, idx int, skorMenang, skorKala
 			}
 
 			// Reset pilihan menjadi nol
-			pilihan = 0
-		} else if pilihan == 3 {
+			pilihan = "0"
+		} else if pilihan == "3" {
 			keluar = true
 		} else {
 			fmt.Println("   Tidak ada pilihan yang anda input.")
