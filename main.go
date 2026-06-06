@@ -135,7 +135,8 @@ func LoginTurnamen(dataTurnamen *tabTurnamen, n int) {
 	// Menu login turnamen
 	fmt.Println("Login")
 	fmt.Print("Masukkan id Turnamen: ")
-	fmt.Scanln(&id)
+	fmt.Scan(&id)
+	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
 	idx = sequentialSearchbyID(*dataTurnamen, id, n)
 	if idx != -1 {
@@ -143,7 +144,8 @@ func LoginTurnamen(dataTurnamen *tabTurnamen, n int) {
 		// Loop untuk verifikasi password
 		for ketemu = false; !ketemu; {
 			fmt.Print("Masukkan password: ")
-			fmt.Scanln(&password)
+			fmt.Scan(&password)
+			fmt.Scanln()
 			if password == dataTurnamen[idx].password {
 				fmt.Println("Login berhasil.")
 				ketemu = true
@@ -195,7 +197,8 @@ func HapusTurnamen(dataTurnamen *tabTurnamen, n *int) {
 	fmt.Println("Hapus Turnamen")
 	// Minta input ID turnamen
 	fmt.Print("Masukkan id Turnamen: ")
-	fmt.Scanln(&id)
+	fmt.Scan(&id)
+	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
 	idx = sequentialSearchbyID(*dataTurnamen, id, *n)
 	if idx != -1 {
@@ -225,7 +228,8 @@ func CariTurnamen(dataTurnamen *tabTurnamen, n int) {
 	// Algoritma
 	// Menu cari turnamen
 	fmt.Print("Masukkan id Turnamen yang ingin dicari: ")
-	fmt.Scanln(&id)
+	fmt.Scan(&id)
+	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
 	idx = sequentialSearchbyID(*dataTurnamen, id, n)
 	if idx != -1 {
@@ -237,7 +241,7 @@ func CariTurnamen(dataTurnamen *tabTurnamen, n int) {
 		fmt.Printf("Jumlah Player: %d Player\n", dataTurnamen[idx].nPemain)
 		fmt.Printf("Pemenang: %s\n", dataTurnamen[idx].pemenang)
 		fmt.Print("Kembali ke menu utama? (tekan apapun) ")
-		fmt.Scanln(&apapun)
+		fmt.Scan(&apapun)
 
 	} else {
 		fmt.Println("Turnamen tidak ditemukan.")
@@ -270,7 +274,7 @@ func ListTurnamen(dataTurnamen *tabTurnamen, n int) {
 			fmt.Println()
 		}
 		fmt.Print("Kembali ke menu utama? (tekan apapun) ")
-		fmt.Scanln(&apapun)
+		fmt.Scan(&apapun)
 	}
 }
 func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
@@ -281,6 +285,7 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 	// kamus lokal
 	var scanner *bufio.Scanner
 	var name string
+	var pilihan int
 
 	// algoritma
 	if dataTurnamen[idx].nPemain >= NMAX {
@@ -292,7 +297,6 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 			fmt.Println("1. Tambah Pemain")
 			fmt.Println("2. Selesai")
 			fmt.Print("Pilih menu: ")
-			var pilihan int
 			fmt.Scan(&pilihan)
 			switch pilihan {
 			case 1:
@@ -416,15 +420,20 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 	}
 }
 func EditPemain(dataTurnamen *tabTurnamen, idx int) {
+	/*
+		I.S terdefinisi data turnamen dengan index idx
+		F.S mengubah data pemain dan mengembalikan dataTurnamen
+	*/
 	// Kamus lokal
 	var id string
-	var index int
+	var index, pilihan int
 	var keluar bool
 
 	// Algoritma
 	// Menu cari turnamen
 	fmt.Print("Masukkan id Pemain yang ingin dicari: ")
-	fmt.Scanln(&id)
+	fmt.Scan(&id)
+	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
 	index = descBinarySearchByID(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain, id)
 	if index != -1 {
@@ -437,20 +446,22 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 			fmt.Printf("3. Jumlah Kalah: %d\n", dataTurnamen[idx].pemain[index].kalah)
 			fmt.Println("4. Selesai")
 			fmt.Print("Pilih data yang ingin diedit: ")
-			var pilihan int
 			fmt.Scan(&pilihan)
 			switch pilihan {
 			case 1:
 				fmt.Print("Masukkan Nama Pemain baru: ")
-				fmt.Scanln(&dataTurnamen[idx].pemain[index].name)
+				fmt.Scan(&dataTurnamen[idx].pemain[index].name)
+				fmt.Scanln()
 				fmt.Println("Nama Pemain berhasil diubah.")
 			case 2:
 				fmt.Print("Masukkan Jumlah Menang baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].menang)
+				fmt.Scanln()
 				fmt.Println("Jumlah Menang berhasil diubah.")
 			case 3:
 				fmt.Print("Masukkan Jumlah Kalah baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].kalah)
+				fmt.Scanln()
 				fmt.Println("Jumlah Kalah berhasil diubah.")
 			case 4:
 				fmt.Print("Keluar dari editor pemain")
@@ -465,13 +476,61 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 		time.Sleep(3 * time.Second)
 	}
 }
-func EditSkor(dataTurnamen *tabTurnamen, idx int) {
-	// Kamus lokal
-	// Algoritma
-}
 func RankingPemain(dataTurnamen *tabTurnamen, idx int) {
+	/*
+		I.S terdefinisi Turnamen berindex idx
+		F.S menampilkan ranking Player kepada user
+	*/
 	// Kamus lokal
+	var i int
+	var apapun string
+
 	// Algoritma
+	fmt.Println("Rangking")
+	for i = 1; i <= dataTurnamen[idx].nPemain; i++ {
+		fmt.Printf("   %d. ID: %s \n", i, dataTurnamen[idx].pemain[i-1].id)
+		fmt.Println("      Name: ", dataTurnamen[idx].pemain[i-1].name)
+		fmt.Println("      Skor: ", dataTurnamen[idx].pemain[i-1].skor)
+	}
+	fmt.Print("Kembali ke menu utama? (tekan apapun) ")
+	fmt.Scan(&apapun)
+}
+func EditSkor(dataTurnamen *tabTurnamen, idx int) {
+	/*
+		I.S terdefinisi data turnamen dengan index idx
+		F.S mengubah data skormenag dan skor kalah
+	*/
+	// Kamus lokal
+	var pilihan int
+	var keluar bool
+
+	// Algoritma
+	for keluar = false; !keluar; {
+		fmt.Println("Pilih skor yang hendak diedit")
+		fmt.Println("1. Menang =", dataTurnamen[idx].skorMenang)
+		fmt.Println("2. Kalah =", dataTurnamen[idx].skorKalah)
+		fmt.Println("3. Keluar")
+		fmt.Print("Pilihan: ")
+		fmt.Scan(&pilihan)
+		switch pilihan {
+		case 1:
+			fmt.Print("Masukkan skor menang yang baru: ")
+			fmt.Scan(&dataTurnamen[idx].skorMenang)
+			fmt.Scanln()
+			fmt.Println("Skor menang berhasil diubah.")
+		case 2:
+			fmt.Print("Masukkan skor kalah yang baru: ")
+			fmt.Scan(&dataTurnamen[idx].skorKalah)
+			fmt.Scanln()
+			fmt.Println("Skor kalah berhasil diubah.")
+		case 3:
+			fmt.Println("Keluar dari editor skor")
+			time.Sleep(3 * time.Second)
+			keluar = true
+		default:
+			fmt.Println("Salah input, mas.")
+		}
+	}
 }
 
 // Kumpulan fungsi sorting dan searching
