@@ -26,6 +26,15 @@ type pemain struct {
 }
 type tabPemain [NMAX]pemain
 
+func Header() {
+	fmt.Println("===================================================")
+	fmt.Println("         APLIKASI MANAJEMEN TURNAMEN GAME          ")
+	fmt.Println("===================================================")
+	fmt.Println("                   Hasan & Rahmat                  ")
+	fmt.Println("===================================================")
+	fmt.Println()
+}
+
 func main() {
 	// Kamus lokal
 	var turnamen tabTurnamen
@@ -37,6 +46,7 @@ func main() {
 	n = 0
 	// Menu utama
 	for keluar = false; !keluar; {
+		Header()
 		fmt.Println("Menu:")
 		fmt.Println("1. Registrasi Turnamen")
 		fmt.Println("2. Login Turnamen")
@@ -486,11 +496,14 @@ func RankingPemain(dataTurnamen *tabTurnamen, idx int) {
 	var apapun string
 
 	// Algoritma
-	fmt.Println("Rangking")
+	fmt.Println("===================================================")
+	fmt.Println("                RANKING PEMAIN                     ")
+	fmt.Println("===================================================")
 	for i = 1; i <= dataTurnamen[idx].nPemain; i++ {
 		fmt.Printf("   %d. ID: %s \n", i, dataTurnamen[idx].pemain[i-1].id)
 		fmt.Println("      Name: ", dataTurnamen[idx].pemain[i-1].name)
 		fmt.Println("      Skor: ", dataTurnamen[idx].pemain[i-1].skor)
+		fmt.Println("---------------------------------------------------")
 	}
 	fmt.Print("Kembali ke menu utama? (tekan apapun) ")
 	fmt.Scan(&apapun)
