@@ -498,9 +498,9 @@ func RankingPemain(dataTurnamen *tabTurnamen, idx int) {
 	var apapun string
 
 	// Algoritma
-	fmt.Println("===================================================")
+	fmt.Println("====================================================")
 	fmt.Println("                RANKING PEMAIN                     ")
-	fmt.Println("===================================================")
+	fmt.Println("====================================================")
 	for i = 1; i <= dataTurnamen[idx].nPemain; i++ {
 		fmt.Printf("   %d. ID: %s \n", i, dataTurnamen[idx].pemain[i-1].id)
 		fmt.Println("      Name: ", dataTurnamen[idx].pemain[i-1].name)
