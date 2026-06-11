@@ -402,7 +402,9 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 	// Algoritma
 	for keluar = false; !keluar; {
 		fmt.Println("Pemenang Turnamen: ", dataTurnamen[idx].pemenang)
+		fmt.Println("==============")
 		fmt.Println("Menu Turnamen:")
+		fmt.Println("==============")
 		fmt.Println("1. Registrasi Pemain")
 		fmt.Println("2. Edit Pemain")
 		fmt.Println("3. Edit Skor")
