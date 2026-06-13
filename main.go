@@ -303,20 +303,20 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 		time.Sleep(3 * time.Second)
 	} else {
 		for keluar := false; !keluar; {
-			fmt.Println("Menu Registrasi Pemain:")
-			fmt.Println("1. Tambah Pemain")
+			fmt.Println("Menu Registrasi Pemain/Tim:")
+			fmt.Println("1. Tambah Pemain/Tim")
 			fmt.Println("2. Selesai")
 			fmt.Print("Pilih menu: ")
 			fmt.Scan(&pilihan)
 			switch pilihan {
 			case 1:
-				fmt.Print("Masukkan ID Pemain: ")
+				fmt.Print("Masukkan ID Pemain/Tim: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].id)
 				// Bersihkan input buffer
 				fmt.Scanln()
 				// Settingan nama Pemain menggunakan bufio.Scanner
 				scanner = bufio.NewScanner(os.Stdin)
-				fmt.Print("Masukkan Nama Player: ")
+				fmt.Print("Masukkan Nama Player/Tim: ")
 				if scanner.Scan() {
 					name = scanner.Text()
 				}
@@ -330,11 +330,11 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 				dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].skor = dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].menang*dataTurnamen[idx].skorMenang + dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].kalah*dataTurnamen[idx].skorKalah
 				// Tambahkan jumlah player di turnamen
 				dataTurnamen[idx].nPemain++
-				fmt.Println("Player berhasil ditambahkan.")
+				fmt.Println("Player/Tim berhasil ditambahkan.")
 			case 2:
 				descSelectionSortBySkor(&dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 				dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
-				fmt.Println("Selesai registrasi player.")
+				fmt.Println("Selesai registrasi Player/Tim.")
 				time.Sleep(3 * time.Second)
 				keluar = true
 			default:
@@ -405,10 +405,10 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 		fmt.Println("==============")
 		fmt.Println("Menu Turnamen:")
 		fmt.Println("==============")
-		fmt.Println("1. Registrasi Pemain")
-		fmt.Println("2. Edit Pemain")
+		fmt.Println("1. Registrasi Pemain/Tim")
+		fmt.Println("2. Edit Pemain/Tim")
 		fmt.Println("3. Edit Skor")
-		fmt.Println("4. Ranking Pemain")
+		fmt.Println("4. Ranking Pemain/Tim")
 		fmt.Println("5. Keluar")
 		fmt.Print("Pilih menu: ")
 		fmt.Scan(&pilihan)
@@ -461,10 +461,10 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 			fmt.Scan(&pilihan)
 			switch pilihan {
 			case 1:
-				fmt.Print("Masukkan Nama Pemain baru: ")
+				fmt.Print("Masukkan Nama Pemain/Tim baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].name)
 				fmt.Scanln()
-				fmt.Println("Nama Pemain berhasil diubah.")
+				fmt.Println("Nama Pemain/Tim berhasil diubah.")
 			case 2:
 				fmt.Print("Masukkan Jumlah Menang baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].menang)
