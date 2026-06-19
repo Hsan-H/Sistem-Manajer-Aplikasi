@@ -26,6 +26,15 @@ type pemain struct {
 }
 type tabPemain [NMAX]pemain
 
+func Header() {
+	fmt.Println("===================================================")
+	fmt.Println("         APLIKASI MANAJEMEN TURNAMEN GAME          ")
+	fmt.Println("===================================================")
+	fmt.Println("                   Hasan & Rahmat                  ")
+	fmt.Println("===================================================")
+	fmt.Println()
+}
+
 func main() {
 	// Kamus lokal
 	var turnamen tabTurnamen
@@ -37,6 +46,7 @@ func main() {
 	n = 0
 	// Menu utama
 	for keluar = false; !keluar; {
+		Header()
 		fmt.Println("Menu:")
 		fmt.Println("1. Registrasi Turnamen")
 		fmt.Println("2. Login Turnamen")
@@ -138,7 +148,7 @@ func LoginTurnamen(dataTurnamen *tabTurnamen, n int) {
 	fmt.Scan(&id)
 	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
-	idx = sequentialSearchbyID(*dataTurnamen, id, n)
+	idx = sequentialSearchbyIDforTurnamen(*dataTurnamen, id, n)
 	if idx != -1 {
 		// Inisialisasi variabel
 		// Loop untuk verifikasi password
@@ -200,7 +210,7 @@ func HapusTurnamen(dataTurnamen *tabTurnamen, n *int) {
 	fmt.Scan(&id)
 	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
-	idx = sequentialSearchbyID(*dataTurnamen, id, *n)
+	idx = sequentialSearchbyIDforTurnamen(*dataTurnamen, id, *n)
 	if idx != -1 {
 		// Hapus turnamen dengan menggeser elemen setelah index ke kiri
 		for i = idx; i < *n-1; i++ {
@@ -231,7 +241,7 @@ func CariTurnamen(dataTurnamen *tabTurnamen, n int) {
 	fmt.Scan(&id)
 	fmt.Scanln()
 	// Cari index turnamen berdasarkan ID menggunakan sequential search
-	idx = sequentialSearchbyID(*dataTurnamen, id, n)
+	idx = sequentialSearchbyIDforTurnamen(*dataTurnamen, id, n)
 	if idx != -1 {
 		// Tampilkan informasi turnamen yang ditemukan
 		fmt.Println("\rData Turnamen ", dataTurnamen[idx].name)
@@ -293,20 +303,20 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 		time.Sleep(3 * time.Second)
 	} else {
 		for keluar := false; !keluar; {
-			fmt.Println("Menu Registrasi Pemain:")
-			fmt.Println("1. Tambah Pemain")
+			fmt.Println("Menu Registrasi Pemain/Tim:")
+			fmt.Println("1. Tambah Pemain/Tim")
 			fmt.Println("2. Selesai")
 			fmt.Print("Pilih menu: ")
 			fmt.Scan(&pilihan)
 			switch pilihan {
 			case 1:
-				fmt.Print("Masukkan ID Pemain: ")
+				fmt.Print("Masukkan ID Pemain/Tim: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].id)
 				// Bersihkan input buffer
 				fmt.Scanln()
 				// Settingan nama Pemain menggunakan bufio.Scanner
 				scanner = bufio.NewScanner(os.Stdin)
-				fmt.Print("Masukkan Nama Player: ")
+				fmt.Print("Masukkan Nama Player/Tim: ")
 				if scanner.Scan() {
 					name = scanner.Text()
 				}
@@ -320,11 +330,11 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 				dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].skor = dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].menang*dataTurnamen[idx].skorMenang + dataTurnamen[idx].pemain[dataTurnamen[idx].nPemain].kalah*dataTurnamen[idx].skorKalah
 				// Tambahkan jumlah player di turnamen
 				dataTurnamen[idx].nPemain++
-				fmt.Println("Player berhasil ditambahkan.")
+				fmt.Println("Player/Tim berhasil ditambahkan.")
 			case 2:
 				descSelectionSortBySkor(&dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 				dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
-				fmt.Println("Selesai registrasi player.")
+				fmt.Println("Selesai registrasi Player/Tim.")
 				time.Sleep(3 * time.Second)
 				keluar = true
 			default:
@@ -392,24 +402,29 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 	// Algoritma
 	for keluar = false; !keluar; {
 		fmt.Println("Pemenang Turnamen: ", dataTurnamen[idx].pemenang)
+		fmt.Println("==============")
 		fmt.Println("Menu Turnamen:")
-		fmt.Println("1. Registrasi Pemain")
-		fmt.Println("2. Edit Pemain")
-		fmt.Println("3. Edit Skor")
-		fmt.Println("4. Ranking Pemain")
-		fmt.Println("5. Keluar")
+		fmt.Println("==============")
+		fmt.Println("1. Registrasi Pemain/Tim")
+		fmt.Println("2. Hapus Pemain/Tim")
+		fmt.Println("3. Edit Pemain/Tim")
+		fmt.Println("4. Edit Skor")
+		fmt.Println("5. Ranking Pemain/Tim")
+		fmt.Println("6. Keluar")
 		fmt.Print("Pilih menu: ")
 		fmt.Scan(&pilihan)
 		switch pilihan {
 		case 1:
 			RegistrasiPemain(dataTurnamen, idx)
 		case 2:
-			EditPemain(dataTurnamen, idx)
+			HapusPemain(dataTurnamen, idx)
 		case 3:
-			EditSkor(dataTurnamen, idx)
+			EditPemain(dataTurnamen, idx)
 		case 4:
-			RankingPemain(dataTurnamen, idx)
+			EditSkor(dataTurnamen, idx)
 		case 5:
+			RankingPemain(dataTurnamen, idx)
+		case 6:
 			fmt.Println("Keluar dari menu turnamen.")
 			time.Sleep(3 * time.Second)
 			keluar = true
@@ -419,6 +434,40 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 		}
 	}
 }
+
+func HapusPemain(dataTurnamen *tabTurnamen, idx int) {
+	/*
+		I.S terdefinisi array dataTurnamen yang berisi n
+		F.S menginput id untuk mencari turnamen yang akan dihapus dan menghapus turnamen tersebut dari array dataTurnamen
+	*/
+	// Kamus lokal
+	var id string
+	var index, i int
+
+	// Algoritma
+	// Menu hapus turnamen
+	fmt.Println("Hapus Pemain")
+	// Minta input ID turnamen
+	fmt.Print("Masukkan id Pemain/Tim: ")
+	fmt.Scan(&id)
+	fmt.Scanln()
+	// Cari index turnamen berdasarkan ID menggunakan sequential search
+	index = sequentialSearchbyIDforPemain(*dataTurnamen, id, idx)
+	if index != -1 {
+		// Hapus turnamen dengan menggeser elemen setelah index ke kiri
+		for i = index; i < dataTurnamen[idx].nPemain-1; i++ {
+			dataTurnamen[idx].pemain[i] = dataTurnamen[idx].pemain[i+1]
+		}
+		// Kurangi jumlah turnamen
+		dataTurnamen[idx].nPemain--
+		fmt.Println("Pemain/Tim berhasil dihapus.")
+		time.Sleep(3 * time.Second)
+	} else {
+		fmt.Println("Pemain/Tim tidak ditemukan.")
+		time.Sleep(3 * time.Second)
+	}
+}
+
 func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 	/*
 		I.S terdefinisi data turnamen dengan index idx
@@ -449,10 +498,10 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 			fmt.Scan(&pilihan)
 			switch pilihan {
 			case 1:
-				fmt.Print("Masukkan Nama Pemain baru: ")
+				fmt.Print("Masukkan Nama Pemain/Tim baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].name)
 				fmt.Scanln()
-				fmt.Println("Nama Pemain berhasil diubah.")
+				fmt.Println("Nama Pemain/Tim berhasil diubah.")
 			case 2:
 				fmt.Print("Masukkan Jumlah Menang baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].menang)
@@ -494,11 +543,14 @@ func RankingPemain(dataTurnamen *tabTurnamen, idx int) {
 	var apapun string
 
 	// Algoritma
-	fmt.Println("Rangking")
+	fmt.Println("====================================================")
+	fmt.Println("                RANKING PEMAIN                     ")
+	fmt.Println("====================================================")
 	for i = 1; i <= dataTurnamen[idx].nPemain; i++ {
 		fmt.Printf("   %d. ID: %s \n", i, dataTurnamen[idx].pemain[i-1].id)
 		fmt.Println("      Name: ", dataTurnamen[idx].pemain[i-1].name)
 		fmt.Println("      Skor: ", dataTurnamen[idx].pemain[i-1].skor)
+		fmt.Println("---------------------------------------------------")
 	}
 	fmt.Print("Kembali ke menu utama? (tekan apapun) ")
 	fmt.Scan(&apapun)
@@ -605,7 +657,7 @@ func descBinarySearchByID(pemain tabPemain, n int, id string) int {
 	}
 }
 
-func sequentialSearchbyID(Turnamen tabTurnamen, id string, n int) int {
+func sequentialSearchbyIDforTurnamen(Turnamen tabTurnamen, id string, n int) int {
 	/*
 		I.S terdefinisi array Turnamen yang berada di index idx yang array Playernya berjumlah n dan variabel id sebagai variabel yang dicari
 		F.S mengembalikan index dari id di dalam data nama Player
@@ -627,6 +679,30 @@ func sequentialSearchbyID(Turnamen tabTurnamen, id string, n int) int {
 		i++
 	}
 	return idx
+}
+
+func sequentialSearchbyIDforPemain(Turnamen tabTurnamen, id string, idx int) int {
+	/*
+		I.S terdefinisi array Turnamen yang berada di index idx yang array Playernya berjumlah n dan variabel id sebagai variabel yang dicari
+		F.S mengembalikan index dari id di dalam data nama Player
+	*/
+
+	// Kamus Lokal
+	var i, index int
+	var ketemu bool
+
+	// Algoritma
+	index = -1
+	ketemu = false
+	i = 0
+	for i < Turnamen[idx].nPemain && !ketemu {
+		if id == Turnamen[idx].pemain[i].id {
+			index = i
+			ketemu = true
+		}
+		i++
+	}
+	return index
 }
 
 func descSelectionSortBySkor(Pemain *tabPemain, n int) {
