@@ -457,11 +457,19 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 				fmt.Print("Masukkan Jumlah Menang baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].menang)
 				fmt.Scanln()
+				for i := 0; i < dataTurnamen[idx].nPemain; i++ {
+					dataTurnamen[idx].pemain[i].skor = dataTurnamen[idx].skorMenang*dataTurnamen[idx].pemain[i].menang + dataTurnamen[idx].skorKalah*dataTurnamen[idx].pemain[i].kalah
+				}
+				dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 				fmt.Println("Jumlah Menang berhasil diubah.")
 			case 3:
 				fmt.Print("Masukkan Jumlah Kalah baru: ")
 				fmt.Scan(&dataTurnamen[idx].pemain[index].kalah)
 				fmt.Scanln()
+				for i := 0; i < dataTurnamen[idx].nPemain; i++ {
+					dataTurnamen[idx].pemain[i].skor = dataTurnamen[idx].skorMenang*dataTurnamen[idx].pemain[i].menang + dataTurnamen[idx].skorKalah*dataTurnamen[idx].pemain[i].kalah
+				}
+				dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 				fmt.Println("Jumlah Kalah berhasil diubah.")
 			case 4:
 				fmt.Print("Keluar dari editor pemain")
@@ -517,11 +525,19 @@ func EditSkor(dataTurnamen *tabTurnamen, idx int) {
 			fmt.Print("Masukkan skor menang yang baru: ")
 			fmt.Scan(&dataTurnamen[idx].skorMenang)
 			fmt.Scanln()
+			for i := 0; i < dataTurnamen[idx].nPemain; i++ {
+				dataTurnamen[idx].pemain[i].skor = dataTurnamen[idx].skorMenang*dataTurnamen[idx].pemain[i].menang + dataTurnamen[idx].skorKalah*dataTurnamen[idx].pemain[i].kalah
+			}
+			dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 			fmt.Println("Skor menang berhasil diubah.")
 		case 2:
 			fmt.Print("Masukkan skor kalah yang baru: ")
 			fmt.Scan(&dataTurnamen[idx].skorKalah)
 			fmt.Scanln()
+			for i := 0; i < dataTurnamen[idx].nPemain; i++ {
+				dataTurnamen[idx].pemain[i].skor = dataTurnamen[idx].skorMenang*dataTurnamen[idx].pemain[i].menang + dataTurnamen[idx].skorKalah*dataTurnamen[idx].pemain[i].kalah
+			}
+			dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 			fmt.Println("Skor kalah berhasil diubah.")
 		case 3:
 			fmt.Println("Keluar dari editor skor")
