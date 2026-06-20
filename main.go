@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"time"
 )
 
 // Kamus global
@@ -69,11 +68,9 @@ func main() {
 			ListTurnamen(&turnamen, n)
 		case 6:
 			fmt.Println("Terima kasih.")
-			time.Sleep(3 * time.Second)
 			keluar = true
 		default:
 			fmt.Println("Salah input, mas.")
-			time.Sleep(3 * time.Second)
 		}
 	}
 }
@@ -92,7 +89,6 @@ func RegistrasiTurnamen(dataTurnamen *tabTurnamen, n *int) {
 	// Menu registrasi turnamen
 	if *n >= NMAX {
 		fmt.Println("Maaf, total yang dapat didaftarkan adalah 100.")
-		time.Sleep(3 * time.Second)
 	} else {
 		fmt.Println("Registrasi")
 		fmt.Print("Masukkan ID Turnamen: ")
@@ -123,7 +119,6 @@ func RegistrasiTurnamen(dataTurnamen *tabTurnamen, n *int) {
 		*n++
 		// Konfirmasi registrasi berhasil
 		fmt.Println("Registrasi berhasil.")
-		time.Sleep(3 * time.Second)
 		// Masuk ke dalam menu turnamen
 		RegistrasiPemain(dataTurnamen, idx)
 		MenuTurnamen(dataTurnamen, idx)
@@ -159,7 +154,6 @@ func LoginTurnamen(dataTurnamen *tabTurnamen, n int) {
 			if password == dataTurnamen[idx].password {
 				fmt.Println("Login berhasil.")
 				ketemu = true
-				time.Sleep(3 * time.Second)
 				MenuTurnamen(dataTurnamen, idx)
 			} else {
 				// Jika password salah, tawarkan pilihan untuk mengulang atau keluar
@@ -173,23 +167,19 @@ func LoginTurnamen(dataTurnamen *tabTurnamen, n int) {
 					case 1:
 						// Ulangi input password
 						fmt.Println("Silakan coba lagi.")
-						time.Sleep(3 * time.Second)
 						keluar = true
 					case 2:
 						fmt.Println("Keluar dari login.")
-						time.Sleep(3 * time.Second)
 						ketemu = true
 						keluar = true
 					default:
 						fmt.Println("Salah input, mas.")
-						time.Sleep(3 * time.Second)
 					}
 				}
 			}
 		}
 	} else {
 		fmt.Println("Turnamen-nya gak ada.")
-		time.Sleep(3 * time.Second)
 	}
 }
 
@@ -219,10 +209,8 @@ func HapusTurnamen(dataTurnamen *tabTurnamen, n *int) {
 		// Kurangi jumlah turnamen
 		*n--
 		fmt.Println("Turnamen berhasil dihapus.")
-		time.Sleep(3 * time.Second)
 	} else {
 		fmt.Println("Turnamen tidak ditemukan.")
-		time.Sleep(3 * time.Second)
 	}
 }
 
@@ -255,7 +243,6 @@ func CariTurnamen(dataTurnamen *tabTurnamen, n int) {
 
 	} else {
 		fmt.Println("Turnamen tidak ditemukan.")
-		time.Sleep(3 * time.Second)
 	}
 }
 func ListTurnamen(dataTurnamen *tabTurnamen, n int) {
@@ -271,7 +258,6 @@ func ListTurnamen(dataTurnamen *tabTurnamen, n int) {
 	// Menu list turnamen
 	if n == 0 {
 		fmt.Println("Belum ada turnamen yang terdaftar.")
-		time.Sleep(3 * time.Second)
 	} else {
 		// Urutkan turnamen berdasarkan id menggunakan insertion sort
 		ascInsertionSortTurnamenByID(dataTurnamen, n)
@@ -300,7 +286,6 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 	// algoritma
 	if dataTurnamen[idx].nPemain >= NMAX {
 		fmt.Println("Maaf, total player yang dapat didaftarkan adalah 100.")
-		time.Sleep(3 * time.Second)
 	} else {
 		for keluar := false; !keluar; {
 			fmt.Println("Menu Registrasi Pemain/Tim:")
@@ -335,7 +320,6 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 				descSelectionSortBySkor(&dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 				dataTurnamen[idx].pemenang = pemenangTurnamen(dataTurnamen[idx].pemain, dataTurnamen[idx].nPemain)
 				fmt.Println("Selesai registrasi Player/Tim.")
-				time.Sleep(3 * time.Second)
 				keluar = true
 			default:
 				fmt.Println("Salah input, mas.")
@@ -401,10 +385,10 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 
 	// Algoritma
 	for keluar = false; !keluar; {
-		fmt.Println("Pemenang Turnamen: ", dataTurnamen[idx].pemenang)
-		fmt.Println("==============")
+		fmt.Println("\n==============")
 		fmt.Println("Menu Turnamen:")
 		fmt.Println("==============")
+		fmt.Println("Pemenang Turnamen: ", dataTurnamen[idx].pemenang)
 		fmt.Println("1. Registrasi Pemain/Tim")
 		fmt.Println("2. Hapus Pemain/Tim")
 		fmt.Println("3. Edit Pemain/Tim")
@@ -426,11 +410,9 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 			RankingPemain(dataTurnamen, idx)
 		case 6:
 			fmt.Println("Keluar dari menu turnamen.")
-			time.Sleep(3 * time.Second)
 			keluar = true
 		default:
 			fmt.Println("Salah input, mas.")
-			time.Sleep(3 * time.Second)
 		}
 	}
 }
@@ -461,10 +443,8 @@ func HapusPemain(dataTurnamen *tabTurnamen, idx int) {
 		// Kurangi jumlah turnamen
 		dataTurnamen[idx].nPemain--
 		fmt.Println("Pemain/Tim berhasil dihapus.")
-		time.Sleep(3 * time.Second)
 	} else {
 		fmt.Println("Pemain/Tim tidak ditemukan.")
-		time.Sleep(3 * time.Second)
 	}
 }
 
@@ -522,7 +502,6 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 				fmt.Println("Jumlah Kalah berhasil diubah.")
 			case 4:
 				fmt.Print("Keluar dari editor pemain")
-				time.Sleep(3 * time.Second)
 				keluar = true
 			default:
 				fmt.Println("Salah input, mas.")
@@ -530,7 +509,6 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 		}
 	} else {
 		fmt.Println("Pemain tidak ditemukan.")
-		time.Sleep(3 * time.Second)
 	}
 }
 func RankingPemain(dataTurnamen *tabTurnamen, idx int) {
@@ -593,7 +571,6 @@ func EditSkor(dataTurnamen *tabTurnamen, idx int) {
 			fmt.Println("Skor kalah berhasil diubah.")
 		case 3:
 			fmt.Println("Keluar dari editor skor")
-			time.Sleep(3 * time.Second)
 			keluar = true
 		default:
 			fmt.Println("Salah input, mas.")
