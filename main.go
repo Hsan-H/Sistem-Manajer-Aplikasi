@@ -25,15 +25,6 @@ type pemain struct {
 }
 type tabPemain [NMAX]pemain
 
-func Header() {
-	fmt.Println("===================================================")
-	fmt.Println("         APLIKASI MANAJEMEN TURNAMEN GAME          ")
-	fmt.Println("===================================================")
-	fmt.Println("                   Hasan & Rahmat                  ")
-	fmt.Println("===================================================")
-	fmt.Println()
-}
-
 func main() {
 	// Kamus lokal
 	var turnamen tabTurnamen
@@ -45,7 +36,12 @@ func main() {
 	n = 0
 	// Menu utama
 	for keluar = false; !keluar; {
-		Header()
+		fmt.Println("===================================================")
+		fmt.Println("         APLIKASI MANAJEMEN TURNAMEN GAME          ")
+		fmt.Println("===================================================")
+		fmt.Println("                   Hasan & Rahmat                  ")
+		fmt.Println("===================================================")
+		fmt.Println()
 		fmt.Println("Menu:")
 		fmt.Println("1. Registrasi Turnamen")
 		fmt.Println("2. Login Turnamen")
