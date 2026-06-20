@@ -80,6 +80,7 @@ func RegistrasiTurnamen(dataTurnamen *tabTurnamen, n *int) {
 		I.S terdefinisi array dataTurnamen yang berisi nO
 		F.S menginput data turnamen baru ke dalam array dataTurnamen dan menambahkan jumlah turnamen n
 	*/
+
 	// Kamus lokal
 	var name string
 	var idx int
@@ -130,6 +131,7 @@ func LoginTurnamen(dataTurnamen *tabTurnamen, n int) {
 		I.S terdefinisi array dataTurnamen yang berisi n
 		F.S menginput id dan password untuk login ke dalam turnamen
 	*/
+
 	// Kamus lokal
 	var id string
 	var password string
@@ -188,6 +190,7 @@ func HapusTurnamen(dataTurnamen *tabTurnamen, n *int) {
 		I.S terdefinisi array dataTurnamen yang berisi n
 		F.S menginput id untuk mencari turnamen yang akan dihapus dan menghapus turnamen tersebut dari array dataTurnamen
 	*/
+
 	// Kamus lokal
 	var id string
 	var idx, i int
@@ -219,6 +222,7 @@ func CariTurnamen(dataTurnamen *tabTurnamen, n int) {
 		I.S terdefinisi array dataTurnamen yang berisi n
 		F.S menginput id untuk mencari turnamen dan menampilkan informasi turnamen yang ditemukan berdasarkan id tersebut
 	*/
+
 	// Kamus lokal
 	var id, apapun string
 	var idx int
@@ -250,6 +254,7 @@ func ListTurnamen(dataTurnamen *tabTurnamen, n int) {
 		I.S terdefinisi array dataTurnamen yang berisi n
 		F.S menampilkan daftar turnamen yang terdaftar di dalam array dataTurnamen
 	*/
+
 	// Kamus lokal
 	var i int
 	var apapun string
@@ -278,6 +283,7 @@ func RegistrasiPemain(dataTurnamen *tabTurnamen, idx int) {
 		I.S terdefinisi array dataTurnamen yang berisi idx dan jumlah player di dalam turnamen tersebut
 		F.S menginput data pemain baru ke dalam array pemain di dalam dataTurnamen pada index idx dan menambahkan jumlah player di turnamen tersebut
 	*/
+
 	// kamus lokal
 	var scanner *bufio.Scanner
 	var name string
@@ -379,6 +385,7 @@ func MenuTurnamen(dataTurnamen *tabTurnamen, idx int) {
 		I.S terdefinisi array dataTurnamen yang berisi idx dan jumlah player di dalam turnamen tersebut
 		F.S menampilkan menu turnamen untuk mengelola data pemain, skor, dan ranking di dalam turnamen tersebut
 	*/
+
 	// kamus lokal
 	var keluar bool
 	var pilihan int
@@ -422,6 +429,7 @@ func HapusPemain(dataTurnamen *tabTurnamen, idx int) {
 		I.S terdefinisi array dataTurnamen yang berisi n
 		F.S menginput id untuk mencari turnamen yang akan dihapus dan menghapus turnamen tersebut dari array dataTurnamen
 	*/
+
 	// Kamus lokal
 	var id string
 	var index, i int
@@ -453,6 +461,7 @@ func EditPemain(dataTurnamen *tabTurnamen, idx int) {
 		I.S terdefinisi data turnamen dengan index idx
 		F.S mengubah data pemain dan mengembalikan dataTurnamen
 	*/
+
 	// Kamus lokal
 	var id string
 	var index, pilihan int
@@ -516,6 +525,7 @@ func RankingPemain(dataTurnamen *tabTurnamen, idx int) {
 		I.S terdefinisi Turnamen berindex idx
 		F.S menampilkan ranking Player kepada user
 	*/
+
 	// Kamus lokal
 	var i int
 	var apapun string
@@ -538,6 +548,7 @@ func EditSkor(dataTurnamen *tabTurnamen, idx int) {
 		I.S terdefinisi data turnamen dengan index idx
 		F.S mengubah data skormenag dan skor kalah
 	*/
+
 	// Kamus lokal
 	var pilihan int
 	var keluar bool
@@ -690,6 +701,7 @@ func descSelectionSortBySkor(Pemain *tabPemain, n int) {
 
 	// Kamus Lokal
 	var i, j, nilaimax int
+
 	// Algoritma
 	for i = 0; i < n; i++ {
 		nilaimax = i
